@@ -1,6 +1,7 @@
 package com.fjjxpjy.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fjjxpjy.enums.LoginEnum;
 import com.fjjxpjy.pojo.Dept;
 import com.fjjxpjy.pojo.User;
 import com.fjjxpjy.service.DpetService;
@@ -31,24 +32,32 @@ public class UserController extends BaseController {
     private DpetService dpetService = new DpetService();
 
     /**
-     * @return void
      * @description 登录
      * @author fangjj
      * @date 2020/9/22
      * @params [request, response]
+     * @return void
      */
     public void login(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
         String username = request.getParameter("username");   //一定要与表单的名字相同
         String password = request.getParameter("password");
         String remember = request.getParameter("remember");
+        String code = request.getParameter("code");
         ObjectMapper om = new ObjectMapper();
 
 
-        User loginUser = userService.checkUser(username, password);
 
+        User loginUser = userService.checkUser(username, password);
         HttpSession session = request.getSession();
         session.setMaxInactiveInterval(60 * 30);
+
+        System.out.println(session.getAttribute(LoginEnum.login_code.getValue()));
+        if(!(code.equalsIgnoreCase((String) session.getAttribute(LoginEnum.login_code.getValue())))){
+
+            response.sendRedirect("/index.jsp");
+            return;
+        }
         if (loginUser != null) {
 
             session.setAttribute("loginSession", loginUser);
@@ -63,7 +72,7 @@ public class UserController extends BaseController {
                 response.addCookie(cookie);
             }
 
-
+            request.setAttribute("loginUser",request.getSession().getAttribute("loginSession"));
             request.getRequestDispatcher("/html/comom/home.jsp").forward(request, response);
 
         } else {

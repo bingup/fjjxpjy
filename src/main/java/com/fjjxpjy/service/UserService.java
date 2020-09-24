@@ -45,6 +45,6 @@ public class UserService {
     }
 
     public void updateUrl(Integer id, String picUrl) {
-        userDao.updateUrl( id,  picUrl);
+        userDao.updateUrl(id,picUrl);
     }
 }

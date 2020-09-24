@@ -164,6 +164,6 @@ public class UserDao extends BaseDao {
 
     public void updateUrl(Integer id, String picUrl) {
         String sql= "update user set pic=? where id=?";
-        jdbcTemplate.update(sql,id,picUrl);
+        jdbcTemplate.update(sql,picUrl,id);
     }
 }

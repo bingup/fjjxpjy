@@ -16,13 +16,14 @@ import java.lang.reflect.Method;
  */
 public class BaseController extends HttpServlet {
     // 当前会话session
-    public HttpSession session;
+    public HttpSession session ;
 
     // 当前登录的用户
     public User loginUser = null;
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response) {
 
+        session = request.getSession();
         // 当前登录用户
         loginUser = (User) session.getAttribute("loginSession");
         //获取请求的URI /user/login

@@ -60,7 +60,8 @@ public class SysFilter extends HttpFilter {
                 }
             }
 
-        } else if (requestURI.endsWith("/menu/listAll") || requestURI.endsWith("/user/login")) {
+        } else if (requestURI.endsWith("/menu/listAll") || requestURI.endsWith("/user/login") ||
+        requestURI.endsWith("/img/getCode")) {
 
 
         }
