@@ -1,9 +1,12 @@
 package com.fjjxpjy.controller;
 
 
+import com.fjjxpjy.pojo.User;
+
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.lang.reflect.Method;
 
 /**
@@ -12,8 +15,16 @@ import java.lang.reflect.Method;
  * @description
  */
 public class BaseController extends HttpServlet {
+    // 当前会话session
+    public HttpSession session;
+
+    // 当前登录的用户
+    public User loginUser = null;
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response) {
+
+        // 当前登录用户
+        loginUser = (User) session.getAttribute("loginSession");
         //获取请求的URI /user/login
         String uri = request.getRequestURI();
 

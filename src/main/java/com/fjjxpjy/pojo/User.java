@@ -1,7 +1,14 @@
-package com.fjjxpjy.pojo;
+package  com.fjjxpjy.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class User extends BasePojo {
+    /**
+     *部门名称
+     *非数据库字段
+     */
+    private String deptName;
     /**
      *用户id
      */
@@ -46,7 +53,7 @@ public class User extends BasePojo {
     /**
      *简介
      */
-    private String desc;
+    private String desc1;
     /**
      *注册时间
      */
@@ -67,10 +74,6 @@ public class User extends BasePojo {
      *是否私密 0 ：私密，1：公开
      */
     private String isSecret;
-    /**
-     *部门名称
-     */
-    private String deptName;
     /**
      *部门id
      */
@@ -156,12 +159,12 @@ public class User extends BasePojo {
         this.gender = gender;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getDesc1() {
+        return desc1;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setDesc1(String desc1) {
+        this.desc1 = desc1;
     }
 
     public String getRegisterTime() {

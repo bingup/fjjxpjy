@@ -35,6 +35,8 @@
 <body>
 <div id="top">
     这是顶部
+        <img src="/img/getHead?pic=${loginUser.pic}" alt="加载中..">
+
 </div>
 </body>
 </html>

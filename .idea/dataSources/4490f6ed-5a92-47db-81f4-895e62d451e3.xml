@@ -1255,7 +1255,7 @@ a_id</ColNames>
       <DataType>varchar(1)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="296" parent="240" name="desc">
+    <column id="296" parent="240" name="desc1">
       <Position>11</Position>
       <Comment>简介</Comment>
       <DataType>varchar(255)|0s</DataType>
@@ -1291,58 +1291,52 @@ a_id</ColNames>
       <DataType>varchar(1)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="302" parent="240" name="dept_name">
+    <column id="302" parent="240" name="dept_id">
       <Position>17</Position>
-      <Comment>部门名称</Comment>
-      <DataType>varchar(20)|0s</DataType>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="303" parent="240" name="dept_id">
-      <Position>18</Position>
       <Comment>部门id</Comment>
       <DataType>int(11)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="304" parent="240" name="PRIMARY">
+    <key id="303" parent="240" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="305" parent="241" name="user_id">
+    <column id="304" parent="241" name="user_id">
       <Position>1</Position>
       <Comment>用户id</Comment>
       <DataType>int(10)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="306" parent="241" name="user_focus_id">
+    <column id="305" parent="241" name="user_focus_id">
       <Position>2</Position>
       <Comment>用户关注的朋友id</Comment>
       <DataType>int(10)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="307" parent="241" name="fk_userFocus_user_1">
+    <index id="306" parent="241" name="fk_userFocus_user_1">
       <ColNames>user_id</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="308" parent="241" name="fk_userFocus_user_2">
+    <index id="307" parent="241" name="fk_userFocus_user_2">
       <ColNames>user_focus_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="309" parent="241" name="PRIMARY">
+    <key id="308" parent="241" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>user_id
 user_focus_id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="310" parent="241" name="a">
+    <foreign-key id="309" parent="241" name="a">
       <ColNames>user_id</ColNames>
       <RefSchemaName>fjjxpjy</RefSchemaName>
       <RefTableName>user</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <foreign-key id="311" parent="241" name="b">
+    <foreign-key id="310" parent="241" name="b">
       <ColNames>user_focus_id</ColNames>
       <RefSchemaName>fjjxpjy</RefSchemaName>
       <RefTableName>user</RefTableName>

@@ -15,7 +15,7 @@
 </div>
 </body>
 <script>
-    window.onload = function () {
+    $(function () {
         $.ajax({
             url: "/menu/listAll",
             type: "post",
@@ -40,7 +40,9 @@
             }
 
         });
-    }
+    })
+
+
 </script>
 <script src="/js/menu.js" type="text/javascript"></script>
 </html>
