@@ -41,7 +41,6 @@
     这是顶部
     <img id="detail-img" src="/img/getHead?pic=${loginUser.pic}" alt="加载中"/>
 
-
     <!-- 真正的头像图片上传表单 -->
     <input type="file" id="picFile" style="display: none;">
 
