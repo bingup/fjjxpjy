@@ -32,11 +32,11 @@ public class UserController extends BaseController {
     private DpetService dpetService = new DpetService();
 
     /**
+     * @return void
      * @description 登录
      * @author fangjj
      * @date 2020/9/22
      * @params [request, response]
-     * @return void
      */
     public void login(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
@@ -47,17 +47,16 @@ public class UserController extends BaseController {
         ObjectMapper om = new ObjectMapper();
 
 
-
         User loginUser = userService.checkUser(username, password);
         HttpSession session = request.getSession();
         session.setMaxInactiveInterval(60 * 30);
 
-        System.out.println(session.getAttribute(LoginEnum.login_code.getValue()));
-        if(!(code.equalsIgnoreCase((String) session.getAttribute(LoginEnum.login_code.getValue())))){
-
-            response.sendRedirect("/index.jsp");
-            return;
-        }
+//        System.out.println(session.getAttribute(LoginEnum.login_code.getValue()));
+//        if (!(code.equalsIgnoreCase((String) session.getAttribute(LoginEnum.login_code.getValue())))) {
+//
+//            response.sendRedirect("/index.jsp");
+//            return;
+//        }
         if (loginUser != null) {
 
             session.setAttribute("loginSession", loginUser);
@@ -72,7 +71,7 @@ public class UserController extends BaseController {
                 response.addCookie(cookie);
             }
 
-            request.setAttribute("loginUser",request.getSession().getAttribute("loginSession"));
+            request.setAttribute("loginUser", request.getSession().getAttribute("loginSession"));
             request.getRequestDispatcher("/html/comom/home.jsp").forward(request, response);
 
         } else {
@@ -82,9 +81,9 @@ public class UserController extends BaseController {
     }
 
     /**
-     * @description 用户查询
      * @param [request, response]
      * @return void
+     * @description 用户查询
      * @author fangjj
      * @date 2020/9/23
      */
@@ -109,8 +108,8 @@ public class UserController extends BaseController {
     }
 
     /**
-     * @description 删除
      * @return void
+     * @description 删除
      * @author fangjj
      * @date 2020/9/23
      * @params [request, response]
@@ -135,28 +134,28 @@ public class UserController extends BaseController {
     }
 
     /**
-     * @description  update更新的过渡
+     * @return void
+     * @description update更新的过渡
      * @author fangjj
      * @date 2020/9/23
      * @params [request, response]
-     * @return void
      */
     public void toupdate(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
         String id = request.getParameter("id");
         User user = userService.findUser(Integer.valueOf(id));
         List<Dept> list = dpetService.findAll();
-        request.setAttribute("list",list);
-        request.setAttribute("user",user);
+        request.setAttribute("list", list);
+        request.setAttribute("user", user);
         request.getRequestDispatcher("/html/user/update.jsp").forward(request, response);
     }
 
     /**
+     * @return void
      * @description user更新数据
      * @author fangjj
      * @date 2020/9/23
      * @params [request, response]
-     * @return void
      */
     public void update(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
@@ -193,25 +192,25 @@ public class UserController extends BaseController {
     }
 
     /**
-     * @description  user添加
+     * @return void
+     * @description user添加
      * @author fangjj
      * @date 2020/9/23
      * @params [request, response]
-     * @return void
      */
     public void add(HttpServletRequest request, HttpServletResponse response) throws Exception {
         Map<String, String[]> map = request.getParameterMap();
         Set<Map.Entry<String, String[]>> entries = map.entrySet();
         //遍历set集合
         for (Map.Entry<String, String[]> entry : entries) {
-            System.out.println(entry.getKey() + "=" + Arrays.toString(entry.getValue()) );
+            System.out.println(entry.getKey() + "=" + Arrays.toString(entry.getValue()));
         }
 
         //创建User对象
         User user = new User();
         //使用BeanUtils工具将表单中所有的数据封装成User对象
         try {
-           BeanUtils.populate(user,map);
+            BeanUtils.populate(user, map);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -230,5 +229,20 @@ public class UserController extends BaseController {
 
         request.getRequestDispatcher("/html/user/list.jsp").forward(request, response);
 
+    }
+
+    /**
+     * @description 根据deptid得到所有的user对象
+     * @author fangjj
+     * @date 2020/9/25
+     * @params [request, response]
+     * @return void
+     */
+    public void getUserByDeptId(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        String deptId = request.getParameter("deptId");
+        List<User> list = userService.getUserByDeptId(Integer.valueOf(deptId));
+        ObjectMapper om = new ObjectMapper();
+        String str = om.writeValueAsString(list);
+        response.getWriter().write(str);
     }
 }

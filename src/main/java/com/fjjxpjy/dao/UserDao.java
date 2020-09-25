@@ -166,4 +166,11 @@ public class UserDao extends BaseDao {
         String sql= "update user set pic=? where id=?";
         jdbcTemplate.update(sql,picUrl,id);
     }
+
+
+    public List<User> getUserByDeptId(Integer deptId) {
+        String sql= "SELECT * from user where dept_id= ?";
+
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(User.class),deptId);
+    }
 }
