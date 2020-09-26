@@ -35,7 +35,7 @@
             <tr>
                 <td>${status.index+1}</td>
                     <%--<td>${status.index+1+(page-1)*3}</td>--%>
-                <td>${meeting.title}</td>
+                <td><a href="/meet/getMeetingById?id=${meeting.id}">${meeting.title} </a></td>
                 <td>            <%--${user.birth}--%>
                         <%--后台传递过来的是Stirng类型--%>
                         <%--第一步：日期类型的字符串转换成日期--%>

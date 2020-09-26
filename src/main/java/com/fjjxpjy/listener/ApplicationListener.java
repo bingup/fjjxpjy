@@ -20,7 +20,7 @@ public class ApplicationListener implements ServletContextListener {
         Timer timer = new Timer();
         MeetingTask myTask = new MeetingTask();
         //一分钟 1000*60
-        timer.schedule(myTask, new Date(), 1000*60*10);
+        timer.schedule(myTask, new Date(), 1000*60*30);
     }
 
     @Override

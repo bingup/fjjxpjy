@@ -50,6 +50,9 @@ public class MeetingService {
 
                 if(now < startTime) {
                     //未开始
+                    meeting.setStatus(MeetingStatusEnum.NO_START.getValue());
+                    System.out.println("会议已经开始重新报名了"+meeting.getId());
+                    meetingDao.updateStatusById(meeting);
                 } else if (startTime <= now && now < endTime){
                     meeting.setStatus(MeetingStatusEnum.RUNNING.getValue());
                     System.out.println("会议修改了状态"+meeting.getId());
@@ -67,5 +70,21 @@ public class MeetingService {
 
         }
 
+    }
+
+    public Meeting getMeetingById(Integer id) {
+        return meetingDao.getMeetingById(id);
+    }
+
+    public List<Integer> getJoinListUseId(String id) {
+        return meetingDao.getJoinListUseId(id);
+    }
+
+    public void joinMeeting(Integer id,Integer userId) {
+        meetingDao.joinMeeting(id,userId);
+    }
+
+    public void exitMeeting(Integer id) {
+        meetingDao.exitMeeting(id);
     }
 }

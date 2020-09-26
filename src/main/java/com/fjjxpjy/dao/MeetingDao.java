@@ -67,4 +67,27 @@ public class MeetingDao extends BaseDao {
         String sql = "update meeting set status = ? where id = ?";
         jdbcTemplate.update(sql,meeting.getStatus(),meeting.getId());
     }
+
+    public Meeting getMeetingById(Integer id) {
+        String sql = "SELECT m.*,d.name as deptName " +
+                "from meeting m,dept d " +
+                "WHERE m.dept_id = d.id and m.id = ?";
+        return jdbcTemplate.queryForObject(sql,new BeanPropertyRowMapper<>(Meeting.class),id);
+    }
+
+
+    public List<Integer> getJoinListUseId(String id) {
+        String sql = "select user_id from meeting_join where meet_id = ?";
+        return jdbcTemplate.queryForList(sql,Integer.class,id);
+    }
+
+    public void joinMeeting(Integer id,Integer userId) {
+        String sql = "insert  into meeting_join values (?,?)";
+        jdbcTemplate.update(sql,id,userId);
+    }
+
+    public void exitMeeting(Integer id) {
+        String sql = "delete from  meeting_join where user_id = ?";
+        jdbcTemplate.update(sql,id);
+    }
 }
